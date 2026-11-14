@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { GAME_EVENTS } from '../bridge/gameEvents';
+import { NASA_GAME_SCENARIOS } from '../game/data/nasaGameData';
 
 export function createMainScene(eventBus) {
   return class MainScene extends Phaser.Scene {
@@ -9,6 +10,7 @@ export function createMainScene(eventBus) {
       this.score = 0;
       this.health = 100;
       this.player = null;
+      this.scenarios = NASA_GAME_SCENARIOS.scenarios;
       this.handlePlayerMove = this.handlePlayerMove.bind(this);
       this.handlePlayerAttack = this.handlePlayerAttack.bind(this);
     }
