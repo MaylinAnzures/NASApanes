@@ -1,0 +1,14 @@
+body:has(.kit) { overflow: auto; }
+.kit { --u: 0.8333px; /* los componentes vienen medidos para 1920; la hoja los muestra al tamaño de su referencia */ min-height: 100%; padding: 56px; background: var(--night); font-family: var(--font-ui); max-width: 1180px; margin: 0 auto; }
+.kit h1 { margin: 8px 0 40px; font: 800 52px/1 var(--font-ui); color: var(--mint-light); }
+.kit h2 { margin: 48px 0 18px; font: 700 28px/1 var(--font-ui); color: var(--mint); }
+.kit__crumb { margin: 0; font: 400 13px var(--font-mono); color: var(--mint); }
+.kit__row { display: grid; grid-template-columns: 1fr 1.2fr; gap: 20px; }
+.kit__box { padding: 28px; border-radius: 28px; background: var(--violet-800); display: grid; gap: 22px; align-content: start; }
+.kit__box--menu { background: var(--violet-600); place-items: center; padding: 50px 30px; }
+.kit__box--menu .trap { width: 100%; }
+.kit__ptitle { margin: 0; font: 800 34px/1 var(--font-ui); color: var(--violet-600); }
+.kit__label { margin: 0; font: 400 12px var(--font-mono); color: #c7a6e6; }
+.kit__note { margin: 4px 0 0; font: 400 14px/1.6 var(--font-ui); color: #ddd0f2; }
+.kit__wrap { display: flex; flex-wrap: wrap; gap: 22px 26px; align-items: center; }
+.kit__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }

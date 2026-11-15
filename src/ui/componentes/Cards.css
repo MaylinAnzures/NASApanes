@@ -1,0 +1,60 @@
+/* ---------- pastillas ---------- */
+.chip {
+  display: inline-block; padding: calc(7.2 * var(--u)) calc(16.8 * var(--u)); border-radius: 999px;
+  font: 400 calc(18 * var(--u)) / 1.1 var(--font-mono); white-space: nowrap;
+}
+.chip--dark  { background: var(--violet-900); color: var(--text-light); }
+.chip--light { background: var(--violet-900); color: var(--mint-light); }
+
+/* ---------- tarjeta de selección ---------- */
+.scard {
+  position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: calc(12 * var(--u));
+  width: 100%; min-height: calc(312 * var(--u)); padding: calc(31.2 * var(--u));
+  border: calc(7.2 * var(--u)) solid transparent; border-radius: calc(40.8 * var(--u));
+  background: var(--violet-600); color: var(--text-light); text-align: left;
+  font-family: var(--font-ui);
+  transition: transform 0.12s, background 0.15s, box-shadow 0.12s;
+}
+.scard:hover:not(:disabled) { transform: translateY(calc(-4.8 * var(--u))); background: #7a1bb0; }
+.scard:focus { outline: none; }
+.scard:focus-visible { border-color: var(--mint); }
+.scard__icon { width: calc(57.6 * var(--u)); height: calc(57.6 * var(--u)); color: var(--mint); margin-bottom: calc(7.2 * var(--u)); }
+.scard__title { font-size: calc(33.6 * var(--u)); font-weight: 700; line-height: 1.15; }
+.scard__desc { font-size: calc(24 * var(--u)); line-height: 1.4; opacity: 0.92; }
+.scard__chips { display: flex; flex-wrap: wrap; gap: calc(9.6 * var(--u)); margin-top: auto; padding-top: calc(12 * var(--u)); }
+
+.scard.is-selected {
+  background: var(--mint-light); color: var(--text-dark); border-color: var(--mint);
+  box-shadow: 0 calc(12 * var(--u)) 0 var(--mint-depth); transform: translateY(calc(-7.2 * var(--u)));
+}
+.scard.is-selected .scard__icon { color: var(--violet-600); }
+.scard__check {
+  position: absolute; top: calc(21.6 * var(--u)); right: calc(21.6 * var(--u));
+  width: calc(55.2 * var(--u)); height: calc(55.2 * var(--u)); border-radius: 50%;
+  display: grid; place-items: center; background: var(--mint); color: var(--text-dark);
+  font-size: calc(33.6 * var(--u)); animation: pop 0.25s ease-out;
+}
+@keyframes pop { from { transform: scale(0); } 70% { transform: scale(1.25); } to { transform: scale(1); } }
+
+.scard.is-disabled { background: #561a80; color: #a67fc8; cursor: not-allowed; }
+.scard.is-disabled .scard__icon { color: #8a63ad; }
+.scard.is-disabled .chip { opacity: 0.6; }
+
+/* ---------- panel con rejilla ---------- */
+.panel-grid {
+  position: relative; background-color: var(--grid-bg);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: calc(36 * var(--u)) calc(36 * var(--u));
+  border: calc(14.4 * var(--u)) solid var(--mint-line);
+  border-radius: calc(132 * var(--u)) calc(28.8 * var(--u)) calc(28.8 * var(--u)) calc(28.8 * var(--u));
+  color: #f0f0f0;
+}
+.panel-grid--round { border-radius: calc(19.2 * var(--u)); border-width: calc(12 * var(--u)); }
+
+/* ---------- trapecio del menú ---------- */
+.trap { position: relative; width: calc(912 * var(--u)); aspect-ratio: 760 / 486; }
+.trap__bg { position: absolute; inset: calc(-16.8 * var(--u)); width: calc(100% + 33.6 * var(--u)); height: calc(100% + 33.6 * var(--u)); overflow: visible; filter: drop-shadow(0 calc(16.8 * var(--u)) 0 rgba(0,0,0,.25)); }
+.trap__body { position: absolute; inset: 0 8% 14% 8%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(40.8 * var(--u)); text-align: center; }
+.chip--danger { background: var(--danger-depth); color: #fff; }

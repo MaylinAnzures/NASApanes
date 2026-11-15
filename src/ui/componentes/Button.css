@@ -1,17 +1,85 @@
+/* Todo se mide con --u (1 px de Figma, lienzo de 1920 x 1080). --h y --depth cambian con size="lg". */
+.btn-wrap {
+  --h: 72;      /* alto del botón */
+  --depth: 7;   /* profundidad (sombra sólida) */
+  --gap: 17;    /* separación entre el botón y cada corchete */
+  --bw: 7;      /* grosor del corchete */
+  --bracket: var(--mint);
+  position: relative; display: inline-flex;
+}
+.btn-wrap--lg { --h: 88; --depth: 10; --gap: 19; --bw: 8; }
+.btn-wrap--block { display: flex; }
+
 .btn {
-  height: var(--btn-h);
-  padding: 0 28px;
+  height: calc(var(--h) * var(--u));
+  min-width: calc(180 * var(--u));
+  padding: 0 calc(40.8 * var(--u));
   border: 0;
-  border-radius: var(--radius);
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
+  border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: calc(12 * var(--u));
+  font: 700 calc(25.2 * var(--u)) / 1 var(--font-mono);
   color: var(--text-dark);
   background: var(--mint);
-  box-shadow: 0 var(--depth) 0 var(--mint-depth);
-  transition: transform 0.06s, box-shadow 0.06s;
+  --shadow-c: var(--mint-depth);
+  box-shadow: 0 calc(var(--depth) * var(--u)) 0 var(--shadow-c);
+  transition: transform 0.06s, box-shadow 0.06s, filter 0.15s;
 }
-.btn--danger { background: var(--danger); box-shadow: 0 var(--depth) 0 var(--danger-depth); }
-.btn:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 2px 0 var(--mint-depth); }
-.btn:focus-visible { outline: 3px solid var(--mint-light); outline-offset: 4px; }
-.btn:disabled { opacity: .45; cursor: not-allowed; box-shadow: none; }
+.btn__icon { width: calc(31.2 * var(--u)); height: calc(31.2 * var(--u)); flex: none; }
+
+.btn--lg { min-width: calc(447.6 * var(--u)); padding: 0 calc(55.2 * var(--u)); gap: calc(16.8 * var(--u)); font-size: calc(38.4 * var(--u)); letter-spacing: 0.02em; }
+.btn--lg .btn__icon { width: calc(38.4 * var(--u)); height: calc(38.4 * var(--u)); }
+
+.btn--danger { background: var(--danger); --shadow-c: var(--danger-depth); }
+.btn--light  { background: var(--mint-light); --shadow-c: #8fc7a5; }
+.btn--violet { background: var(--violet-600); color: var(--text-light); --shadow-c: var(--violet-900); }
+
+.btn:hover:not(:disabled) { filter: brightness(1.07); transform: translateY(calc(-1.2 * var(--u))); }
+.btn:active:not(:disabled), .btn.is-pressed {
+  transform: translateY(calc(4.8 * var(--u)));
+  box-shadow: 0 calc((var(--depth) - 5) * var(--u)) 0 var(--shadow-c);
+  filter: none;
+}
+
+.btn:disabled, .is-focus .btn:disabled {
+  background: #5a1a85; background-image: none; color: #a67fc8; box-shadow: none; cursor: not-allowed; transform: none; filter: none;
+}
+
+/* foco: degradado + corchetes (sirve igual con teclado, control o toque) */
+.btn:focus { outline: none; }
+.btn:focus-visible, .is-focus .btn {
+  background-image: linear-gradient(90deg, var(--mint) 0%, #effff5 50%, var(--mint) 100%);
+}
+.btn--danger:focus-visible, .is-focus .btn--danger { background-image: linear-gradient(90deg, var(--danger), #ffe0e2 50%, var(--danger)); }
+.btn--light:focus-visible, .is-focus .btn--light { background-image: linear-gradient(90deg, var(--mint-light), #ffffff 50%, var(--mint-light)); }
+.btn--violet:focus-visible, .is-focus .btn--violet { background-image: linear-gradient(90deg, var(--violet-600), #8a3fc0 50%, var(--violet-600)); }
+
+/*
+  Corchetes: SIMÉTRICOS respecto al botón completo (cuerpo + profundidad).
+  - Verticalmente van de -12 a (alto + profundidad + 12), así el centro coincide con el del botón con su sombra.
+  - Horizontalmente quedan FUERA del botón con una separación `--gap` (antes lo tapaban).
+*/
+.btn-wrap::before, .btn-wrap::after {
+  content: ''; position: absolute; pointer-events: none; opacity: 0;
+  top: calc(-12 * var(--u));
+  bottom: calc((-12 - var(--depth)) * var(--u));
+  width: calc((var(--bw) * 4) * var(--u));
+  border: calc(var(--bw) * var(--u)) solid var(--bracket);
+  transition: opacity 0.12s, transform 0.12s;
+}
+.btn-wrap::before {
+  right: 100%; margin-right: calc(var(--gap) * var(--u));
+  border-right: 0; border-radius: calc((var(--h) / 2 + 7) * var(--u)) 0 0 calc((var(--h) / 2 + 7) * var(--u));
+  transform: translateX(calc(12 * var(--u)));
+}
+.btn-wrap::after {
+  left: 100%; margin-left: calc(var(--gap) * var(--u));
+  border-left: 0; border-radius: 0 calc((var(--h) / 2 + 7) * var(--u)) calc((var(--h) / 2 + 7) * var(--u)) 0;
+  transform: translateX(calc(-12 * var(--u)));
+}
+.btn-wrap:has(.btn:focus-visible)::before, .btn-wrap:has(.btn:focus-visible)::after,
+.btn-wrap.is-focus::before, .btn-wrap.is-focus::after { opacity: 1; transform: none; }
+.btn-wrap:has(.btn:disabled)::before, .btn-wrap:has(.btn:disabled)::after { opacity: 0; }
+
+/* sobre paneles verdes los corchetes van en gris claro, como en la referencia */
+.panel-grid .btn-wrap, .trap--grid .btn-wrap { --bracket: #dcdcdc; }

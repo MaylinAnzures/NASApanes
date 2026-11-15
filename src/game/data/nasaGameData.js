@@ -29,29 +29,43 @@ export const NASA_GAME_SCENARIOS = {
             "eventType": "NEGATIVE_TRADEOFF",
             "category": "Power & Thermal Management",
             "realWorldSource": "ISS Orbital Eclipse Telemetry & NASA BVAD Power Subsystems",
-            "situationTitle": "¡Caída de Tensión en Sombra Orbital!",
-            "kidFriendlyContext": "Cuando la cápsula pasa por la sombra de la Tierra, los paneles solares dejan de producir electricidad. Como las antenas y las luces del mini-huerto gastan mucha energía, las baterías se vacían rápido y la calefacción pierde fuerza.",
+            "situationTitle": "¡Se hizo de noche en la nave!",
+            "kidFriendlyContext": "La nave pasó por la sombra de la Tierra y los paneles solares ya no reciben luz. Las baterías se están vaciando y empieza a hacer frío adentro.",
             "triggerConditions": {
-                "dayRange": [2, 13],
-                "requiredEquipment": ["IROSA_SOLAR", "VEGGIE_GARDEN"],
+                "dayRange": [
+                    2,
+                    13
+                ],
+                "requiredEquipment": [
+                    "IROSA_SOLAR",
+                    "VEGGIE_GARDEN"
+                ],
                 "resourceThresholds": {
                     "logic": "AND",
                     "conditions": [
-                        { "metric": "electricidad", "operator": "<", "value": 35 }
+                        {
+                            "metric": "electricidad",
+                            "operator": "<",
+                            "value": 35
+                        }
                     ]
                 }
             },
             "probabilities": {
-                "baseTriggerChance": 0.40,
-                "baseAvoidChance": 0.60,
+                "baseTriggerChance": 0.4,
+                "baseAvoidChance": 0.6,
                 "crewModifiers": []
             },
             "gameplayMechanics": {
-                "resourcesAffected": ["electricidad", "comida", "salud"],
+                "resourcesAffected": [
+                    "electricidad",
+                    "comida",
+                    "salud"
+                ],
                 "playerChoiceA": {
-                    "action": "Apagar el Mini-Huerto Veggie durante 48 horas",
-                    "sacrifice": "-2.5 kg de Comida",
-                    "benefit": "+15% de Electricidad",
+                    "action": "Apagar el huerto por 2 días",
+                    "sacrifice": "Pierdes 2.5 kg de comida",
+                    "benefit": "Ganas 15% de energía",
                     "effects": {
                         "electricidad": 15,
                         "agua": 0,
@@ -59,12 +73,12 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": 0,
                         "oxigeno": 0
                     },
-                    "result": "Ahorras batería suficiente para mantener la cabina caliente, pero pierdes parte de la cosecha fresca."
+                    "result": "Ahorras energía y la cabina sigue calientita, pero se pierde parte de la cosecha."
                 },
                 "playerChoiceB": {
-                    "action": "Mantener el huerto encendido y apagar la calefacción",
-                    "sacrifice": "-12% de Salud",
-                    "benefit": "Conserva el 100% de la Comida",
+                    "action": "Dejar el huerto prendido y apagar la calefacción",
+                    "sacrifice": "Pierdes 12% de salud",
+                    "benefit": "No pierdes comida",
                     "effects": {
                         "electricidad": 0,
                         "agua": 0,
@@ -72,7 +86,7 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": -12,
                         "oxigeno": 0
                     },
-                    "result": "Las plantas sobreviven intactas, pero el frío dentro de la cápsula debilita a los astronautas."
+                    "result": "Las plantas se salvan, pero el frío cansa a los astronautas."
                 }
             },
             "educationalTakeaway": "En órbita baja o alta, las naves entran en eclipse varias veces al día y deben racionar sus baterías entre ciencia y temperatura."
@@ -83,35 +97,44 @@ export const NASA_GAME_SCENARIOS = {
             "eventType": "NEGATIVE_TRADEOFF",
             "category": "Space Weather & Shielding",
             "realWorldSource": "NASA CCMC DONKI (2026-10-09-FLR-001 - Clase X9.0)",
-            "situationTitle": "¡Impacto de Llamarada Solar Clase X9.0!",
-            "kidFriendlyContext": "El Sol lanza una nube de rayos invisibles muy potentes. Aunque las paredes de plástico especial (HDPE) detienen la mayor parte, un poco logra entrar y puede debilitar a los astronautas.",
+            "situationTitle": "¡Llegó una tormenta del Sol!",
+            "kidFriendlyContext": "El Sol lanzó una ola de rayos invisibles que pueden enfermar a los astronautas. Las paredes de la nave los frenan, pero algunos todavía pasan.",
             "triggerConditions": {
-                "dayRange": [7, 12],
-                "requiredEquipment": ["HDPE_SHIELDING"],
+                "dayRange": [
+                    7,
+                    12
+                ],
+                "requiredEquipment": [
+                    "HDPE_SHIELDING"
+                ],
                 "resourceThresholds": {
                     "logic": "AND",
                     "conditions": []
                 }
             },
             "probabilities": {
-                "baseTriggerChance": 0.60,
-                "baseAvoidChance": 0.40,
+                "baseTriggerChance": 0.6,
+                "baseAvoidChance": 0.4,
                 "crewModifiers": [
                     {
                         "astronautId": "ASTRO-05",
                         "role": "Físico de Radiación",
-                        "triggerChanceDelta": -0.30,
-                        "finalTriggerChance": 0.30,
-                        "finalAvoidChance": 0.70
+                        "triggerChanceDelta": -0.3,
+                        "finalTriggerChance": 0.3,
+                        "finalAvoidChance": 0.7
                     }
                 ]
             },
             "gameplayMechanics": {
-                "resourcesAffected": ["agua", "electricidad", "salud"],
+                "resourcesAffected": [
+                    "agua",
+                    "electricidad",
+                    "salud"
+                ],
                 "playerChoiceA": {
-                    "action": "Apilar bolsas de agua alrededor de la cabina y reforzar sensores",
-                    "sacrifice": "-12 L de Agua y -15% de Electricidad",
-                    "benefit": "Minimiza daño a solo -4% de Salud",
+                    "action": "Poner bolsas de agua alrededor de la cabina",
+                    "sacrifice": "Pierdes 12 L de agua y 15% de energía",
+                    "benefit": "Solo pierdes 4% de salud",
                     "effects": {
                         "electricidad": -15,
                         "agua": -12,
@@ -119,12 +142,12 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": -4,
                         "oxigeno": 0
                     },
-                    "result": "El agua absorbe la radiación como un escudo líquido y protege casi por completo a la tripulación."
+                    "result": "El agua funciona como un escudo y casi protege a todos."
                 },
                 "playerChoiceB": {
-                    "action": "Conservar reservas intactas sin mover las bolsas de agua",
-                    "sacrifice": "-18% de Salud",
-                    "benefit": "Conserva 100% de Agua y Electricidad",
+                    "action": "No gastar agua ni energía",
+                    "sacrifice": "Pierdes 18% de salud",
+                    "benefit": "Guardas toda tu agua y energía",
                     "effects": {
                         "electricidad": 0,
                         "agua": 0,
@@ -132,7 +155,7 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": -18,
                         "oxigeno": 0
                     },
-                    "result": "No gastas agua ni batería, pero la radiación golpea directamente al equipo."
+                    "result": "Ahorras recursos, pero los rayos golpean al equipo de lleno."
                 }
             },
             "educationalTakeaway": "El agua es rica en hidrógeno y funciona como uno de los mejores escudos contra tormentas solares registradas por la red DONKI."
@@ -143,15 +166,25 @@ export const NASA_GAME_SCENARIOS = {
             "eventType": "NEGATIVE_TRADEOFF",
             "category": "Atmosphere & Life Support (ECLSS)",
             "realWorldSource": "NASA BVAD LiOH Scrubber Humidity Limits & OSDR OSD-895",
-            "situationTitle": "¡Filtros de Aire Empapados por Humedad!",
-            "kidFriendlyContext": "Las plantas del mini-huerto sueltan vapor de agua al respirar. Como esta nave no tiene máquina para secar el aire, esa humedad moja los filtros químicos y vicia el aire de la cabina.",
+            "situationTitle": "¡El aire de la nave está muy húmedo!",
+            "kidFriendlyContext": "Las plantas del huerto sueltan mucha agua en el aire. La humedad moja los filtros y el aire se siente pesado.",
             "triggerConditions": {
-                "dayRange": [2, 10],
-                "requiredEquipment": ["VEGGIE_GARDEN", "LIOH_FILTERS"],
+                "dayRange": [
+                    2,
+                    10
+                ],
+                "requiredEquipment": [
+                    "VEGGIE_GARDEN",
+                    "LIOH_FILTERS"
+                ],
                 "resourceThresholds": {
                     "logic": "AND",
                     "conditions": [
-                        { "metric": "agua", "operator": ">", "value": 70 }
+                        {
+                            "metric": "agua",
+                            "operator": ">",
+                            "value": 70
+                        }
                     ]
                 }
             },
@@ -161,11 +194,15 @@ export const NASA_GAME_SCENARIOS = {
                 "crewModifiers": []
             },
             "gameplayMechanics": {
-                "resourcesAffected": ["oxigeno", "comida", "salud"],
+                "resourcesAffected": [
+                    "oxigeno",
+                    "comida",
+                    "salud"
+                ],
                 "playerChoiceA": {
-                    "action": "Purgar la cabina con aire seco de los tanques principales",
-                    "sacrifice": "-4.5 kg de Oxígeno",
-                    "benefit": "Salva al 100% la Salud y la Comida",
+                    "action": "Cambiar el aire con aire seco de los tanques",
+                    "sacrifice": "Pierdes 4.5 kg de oxígeno",
+                    "benefit": "No pierdes salud ni comida",
                     "effects": {
                         "electricidad": 0,
                         "agua": 0,
@@ -173,20 +210,20 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": 0,
                         "oxigeno": -4.5
                     },
-                    "result": "Renuevas el aire de inmediato; los astronautas respiran limpio y las plantas siguen creciendo."
+                    "result": "El aire queda limpio y las plantas siguen creciendo."
                 },
                 "playerChoiceB": {
-                    "action": "Cortar el riego del huerto y soportar aire húmedo 24 horas",
-                    "sacrifice": "-2.0 kg de Comida y -8% de Salud",
-                    "benefit": "Ahorra el 100% del Oxígeno",
+                    "action": "Dejar de regar y aguantar un día",
+                    "sacrifice": "Pierdes 2 kg de comida y 8% de salud",
+                    "benefit": "No gastas oxígeno",
                     "effects": {
                         "electricidad": 0,
                         "agua": 0,
-                        "comida": -2.0,
+                        "comida": -2,
                         "salud": -8,
                         "oxigeno": 0
                     },
-                    "result": "No gastas oxígeno de reserva, pero el aire pesado provoca dolor de cabeza y seca parte del cultivo."
+                    "result": "Ahorras aire, pero a todos les duele la cabeza y se seca parte del huerto."
                 }
             },
             "educationalTakeaway": "En naves sin recicladores regenerativos, el exceso de humedad satura los cartuchos de hidróxido de litio (LiOH)."
@@ -197,11 +234,17 @@ export const NASA_GAME_SCENARIOS = {
             "eventType": "NEGATIVE_TRADEOFF",
             "category": "Orbital Debris & EVA Operations",
             "realWorldSource": "NASA Orbital Debris Program & ISS iROSA Array Telemetry",
-            "situationTitle": "¡Impacto de Micrometeorito en Panel Solar!",
-            "kidFriendlyContext": "Una piedrita espacial que viaja súper rápido golpea una de las alas solares de la nave y hace un agujero. Ahora los paneles producen menos electricidad cada día.",
+            "situationTitle": "¡Una piedra espacial chocó con la nave!",
+            "kidFriendlyContext": "Una piedrita que viaja a toda velocidad hizo un agujero en un panel solar. Ahora la nave produce menos energía.",
             "triggerConditions": {
-                "dayRange": [3, 13],
-                "requiredEquipment": ["IROSA_SOLAR", "ISS_EMU_SUITS"],
+                "dayRange": [
+                    3,
+                    13
+                ],
+                "requiredEquipment": [
+                    "IROSA_SOLAR",
+                    "ISS_EMU_SUITS"
+                ],
                 "resourceThresholds": {
                     "logic": "AND",
                     "conditions": []
@@ -214,31 +257,35 @@ export const NASA_GAME_SCENARIOS = {
                     {
                         "astronautId": "ASTRO-12",
                         "role": "Especialista en Telecomunicaciones",
-                        "triggerChanceDelta": -0.30,
+                        "triggerChanceDelta": -0.3,
                         "finalTriggerChance": 0.15,
                         "finalAvoidChance": 0.85
                     }
                 ]
             },
             "gameplayMechanics": {
-                "resourcesAffected": ["oxigeno", "salud", "electricidad"],
+                "resourcesAffected": [
+                    "oxigeno",
+                    "salud",
+                    "electricidad"
+                ],
                 "playerChoiceA": {
-                    "action": "Salir con trajes espaciales a parchar el panel solar",
-                    "sacrifice": "-3.0 kg de Oxígeno y -6% de Salud",
-                    "benefit": "Recupera +20% de Electricidad",
+                    "action": "Salir con trajes espaciales a arreglar el panel",
+                    "sacrifice": "Pierdes 3 kg de oxígeno y 6% de salud",
+                    "benefit": "Ganas 20% de energía",
                     "effects": {
                         "electricidad": 20,
                         "agua": 0,
                         "comida": 0,
                         "salud": -6,
-                        "oxigeno": -3.0
+                        "oxigeno": -3
                     },
-                    "result": "La caminata espacial es agotadora y gasta aire de los trajes, pero el ala solar vuelve a funcionar al máximo."
+                    "result": "Salir cansa mucho, pero el panel vuelve a funcionar."
                 },
                 "playerChoiceB": {
-                    "action": "No salir al exterior y trabajar con el panel dañado",
-                    "sacrifice": "-20% de Electricidad",
-                    "benefit": "Conserva 100% de Oxígeno y Salud",
+                    "action": "Quedarse adentro con el panel roto",
+                    "sacrifice": "Pierdes 20% de energía",
+                    "benefit": "No pierdes oxígeno ni salud",
                     "effects": {
                         "electricidad": -20,
                         "agua": 0,
@@ -246,7 +293,7 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": 0,
                         "oxigeno": 0
                     },
-                    "result": "Evitas riesgos afuera de la nave, pero las baterías caen de golpe."
+                    "result": "Nadie corre peligro afuera, pero las baterías bajan de golpe."
                 }
             },
             "educationalTakeaway": "Los micrometeoritos orbitan a más de 28,000 km/h; los radares de telemetría permiten ajustar la órbita para esquivarlos."
@@ -257,43 +304,60 @@ export const NASA_GAME_SCENARIOS = {
             "eventType": "NEGATIVE_TRADEOFF",
             "category": "Crew Physiology & Rationing",
             "realWorldSource": "NASA OSDR Bio Repo (OSD-1010 & Crew Metabolic Baseline)",
-            "situationTitle": "¡Descompensación en la Recta Final!",
-            "kidFriendlyContext": "Falta muy poco para volver a la Tierra, pero queda poco aire en los tanques y poca comida. Los astronautas se cansan más rápido y respiran con mayor esfuerzo.",
+            "situationTitle": "¡Ya casi llegamos, pero falta aire y comida!",
+            "kidFriendlyContext": "Falta poco para volver a casa, pero quedan pocas reservas de aire y de comida. Los astronautas se cansan más rápido.",
             "triggerConditions": {
-                "dayRange": [10, 13],
+                "dayRange": [
+                    10,
+                    13
+                ],
                 "requiredEquipment": [],
                 "resourceThresholds": {
                     "logic": "OR",
                     "conditions": [
-                        { "metric": "oxigeno", "operator": "<", "value": 25 },
-                        { "metric": "comida", "operator": "<", "value": 25 }
+                        {
+                            "metric": "oxigeno",
+                            "operator": "<",
+                            "value": 25
+                        },
+                        {
+                            "metric": "comida",
+                            "operator": "<",
+                            "value": 25
+                        }
                     ]
                 }
             },
             "probabilities": {
-                "baseTriggerChance": 0.50,
-                "baseAvoidChance": 0.50,
+                "baseTriggerChance": 0.5,
+                "baseAvoidChance": 0.5,
                 "crewModifiers": []
             },
             "gameplayMechanics": {
-                "resourcesAffected": ["agua", "electricidad", "oxigeno", "comida", "salud"],
+                "resourcesAffected": [
+                    "agua",
+                    "electricidad",
+                    "oxigeno",
+                    "comida",
+                    "salud"
+                ],
                 "playerChoiceA": {
-                    "action": "Forzar riego y luces LED del huerto para cosecha rápida",
-                    "sacrifice": "-10 L de Agua y -18% de Electricidad",
-                    "benefit": "+2.5 kg de Oxígeno y +2.0 kg de Comida",
+                    "action": "Regar y prender las luces del huerto a toda potencia",
+                    "sacrifice": "Pierdes 10 L de agua y 18% de energía",
+                    "benefit": "Ganas 2.5 kg de oxígeno y 2 kg de comida",
                     "effects": {
                         "electricidad": -18,
                         "agua": -10,
-                        "comida": 2.0,
+                        "comida": 2,
                         "salud": 0,
                         "oxigeno": 2.5
                     },
-                    "result": "Las plantas producen oxígeno y alimento de emergencia a cambio de gastar agua y batería."
+                    "result": "Las plantas dan aire y comida extra a cambio de agua y energía."
                 },
                 "playerChoiceB": {
-                    "action": "Aplicar racionamiento estricto y reposo absoluto",
-                    "sacrifice": "-14% de Salud",
-                    "benefit": "Recupera +1.5 kg de Oxígeno y +1.5 kg de Comida",
+                    "action": "Comer menos y descansar mucho",
+                    "sacrifice": "Pierdes 14% de salud",
+                    "benefit": "Ganas 1.5 kg de oxígeno y 1.5 kg de comida",
                     "effects": {
                         "electricidad": 0,
                         "agua": 0,
@@ -301,7 +365,7 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": -14,
                         "oxigeno": 1.5
                     },
-                    "result": "Al quedarse quietos y comer menos, estiran las reservas finales pero llegan debilitados."
+                    "result": "Las reservas rinden más, pero todos llegan muy cansados."
                 }
             },
             "educationalTakeaway": "El cuerpo humano consume más oxígeno y calorías cuando trabaja bajo estrés en microgravedad."
@@ -312,17 +376,32 @@ export const NASA_GAME_SCENARIOS = {
             "eventType": "POSITIVE_RESCUE",
             "category": "Ground Control Optimization",
             "realWorldSource": "NASA Deep Space Network & Orbital Telemetry Optimization",
-            "situationTitle": "¡Ventana Orbital Despejada y Apoyo de Tierra!",
-            "kidFriendlyContext": "¡Buenas noticias! La cápsula cruza una zona con luz solar directa sin eclipses largos y Control de Tierra envía una señal para recuperar reservas atrapadas en los conductos. Elige qué recurso bajo quieres rescatar:",
+            "situationTitle": "¡Buenas noticias desde la Tierra!",
+            "kidFriendlyContext": "La nave recibe mucha luz del Sol y Control de Misión te manda ayuda. Puedes recuperar UNA cosa que te esté faltando. ¿Cuál eliges?",
             "triggerConditions": {
-                "dayRange": [3, 13],
+                "dayRange": [
+                    3,
+                    13
+                ],
                 "requiredEquipment": [],
                 "resourceThresholds": {
                     "logic": "OR",
                     "conditions": [
-                        { "metric": "electricidad", "operator": "<", "value": 30 },
-                        { "metric": "agua", "operator": "<", "value": 30 },
-                        { "metric": "oxigeno", "operator": "<", "value": 30 }
+                        {
+                            "metric": "electricidad",
+                            "operator": "<",
+                            "value": 30
+                        },
+                        {
+                            "metric": "agua",
+                            "operator": "<",
+                            "value": 30
+                        },
+                        {
+                            "metric": "oxigeno",
+                            "operator": "<",
+                            "value": 30
+                        }
                     ]
                 }
             },
@@ -332,11 +411,15 @@ export const NASA_GAME_SCENARIOS = {
                 "crewModifiers": []
             },
             "gameplayMechanics": {
-                "resourcesAffected": ["electricidad", "agua", "oxigeno"],
+                "resourcesAffected": [
+                    "electricidad",
+                    "agua",
+                    "oxigeno"
+                ],
                 "playerChoiceA": {
-                    "action": "Carga rápida de baterías solares",
-                    "sacrifice": "Ninguno",
-                    "benefit": "+25% de Electricidad",
+                    "action": "Cargar las baterías",
+                    "sacrifice": "Sin costo",
+                    "benefit": "Ganas 25% de energía",
                     "effects": {
                         "electricidad": 25,
                         "agua": 0,
@@ -344,12 +427,12 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": 0,
                         "oxigeno": 0
                     },
-                    "result": "Las baterías reciben una recarga completa gracias al ángulo perfecto con el Sol."
+                    "result": "Las baterías se llenan gracias al Sol."
                 },
                 "playerChoiceB": {
-                    "action": "Purga de agua condensada en tuberías",
-                    "sacrifice": "Ninguno",
-                    "benefit": "+18 L de Agua",
+                    "action": "Recuperar agua de las tuberías",
+                    "sacrifice": "Sin costo",
+                    "benefit": "Ganas 18 L de agua",
                     "effects": {
                         "electricidad": 0,
                         "agua": 18,
@@ -357,20 +440,20 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": 0,
                         "oxigeno": 0
                     },
-                    "result": "Recuperas agua limpia atrapada en los sistemas de enfriamiento."
+                    "result": "Sacas agua limpia que estaba atrapada en los tubos."
                 },
                 "playerChoiceC": {
-                    "action": "Liberar reserva de seguridad de tanques auxiliares",
-                    "sacrifice": "Ninguno",
-                    "benefit": "+5.0 kg de Oxígeno",
+                    "action": "Abrir los tanques de aire de repuesto",
+                    "sacrifice": "Sin costo",
+                    "benefit": "Ganas 5 kg de oxígeno",
                     "effects": {
                         "electricidad": 0,
                         "agua": 0,
                         "comida": 0,
                         "salud": 0,
-                        "oxigeno": 5.0
+                        "oxigeno": 5
                     },
-                    "result": "Los tanques secundarios transfieren aire fresco directo a la cabina."
+                    "result": "Los tanques extra llenan la cabina de aire fresco."
                 }
             },
             "educationalTakeaway": "Los ingenieros en la Tierra monitorean cada válvula de la nave para exprimir hasta la última gota de agua o voltio disponible."
@@ -381,30 +464,47 @@ export const NASA_GAME_SCENARIOS = {
             "eventType": "POSITIVE_RESCUE",
             "category": "Space Agriculture & Nutrition",
             "realWorldSource": "NASA OSDR Bio Repo (OSD-895: EDEN ISS Biomass Production)",
-            "situationTitle": "¡Brote Acelerado en el Mini-Huerto Veggie!",
-            "kidFriendlyContext": "La temperatura y luz rosa del mini-huerto lograron un crecimiento súper rápido en las plantas. El Astrobiólogo puede aprovechar este brote para ayudar al equipo. Elige qué recurso recuperar:",
+            "situationTitle": "¡El huerto creció muy rápido!",
+            "kidFriendlyContext": "La luz especial hizo que las plantas crecieran más de lo esperado. El astrobiólogo dice que puedes usarlas para ayudar al equipo. ¿Qué eliges?",
             "triggerConditions": {
-                "dayRange": [4, 13],
-                "requiredEquipment": ["VEGGIE_GARDEN"],
+                "dayRange": [
+                    4,
+                    13
+                ],
+                "requiredEquipment": [
+                    "VEGGIE_GARDEN"
+                ],
                 "resourceThresholds": {
                     "logic": "OR",
                     "conditions": [
-                        { "metric": "comida", "operator": "<", "value": 30 },
-                        { "metric": "salud", "operator": "<", "value": 30 }
+                        {
+                            "metric": "comida",
+                            "operator": "<",
+                            "value": 30
+                        },
+                        {
+                            "metric": "salud",
+                            "operator": "<",
+                            "value": 30
+                        }
                     ]
                 }
             },
             "probabilities": {
-                "baseTriggerChance": 0.30,
-                "baseAvoidChance": 0.70,
+                "baseTriggerChance": 0.3,
+                "baseAvoidChance": 0.7,
                 "crewModifiers": []
             },
             "gameplayMechanics": {
-                "resourcesAffected": ["comida", "salud", "oxigeno"],
+                "resourcesAffected": [
+                    "comida",
+                    "salud",
+                    "oxigeno"
+                ],
                 "playerChoiceA": {
-                    "action": "Cosecha extra de vegetales frescos",
-                    "sacrifice": "Ninguno",
-                    "benefit": "+3.5 kg de Comida",
+                    "action": "Cosechar verduras frescas",
+                    "sacrifice": "Sin costo",
+                    "benefit": "Ganas 3.5 kg de comida",
                     "effects": {
                         "electricidad": 0,
                         "agua": 0,
@@ -412,12 +512,12 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": 0,
                         "oxigeno": 0
                     },
-                    "result": "Llenas la despensa con hojas frescas ricas en nutrientes."
+                    "result": "La despensa se llena de verduras ricas y sanas."
                 },
                 "playerChoiceB": {
-                    "action": "Preparar suplemento vitamínico revitalizante",
-                    "sacrifice": "Ninguno",
-                    "benefit": "+18% de Salud",
+                    "action": "Preparar vitaminas con las plantas",
+                    "sacrifice": "Sin costo",
+                    "benefit": "Ganas 18% de salud",
                     "effects": {
                         "electricidad": 0,
                         "agua": 0,
@@ -425,12 +525,12 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": 18,
                         "oxigeno": 0
                     },
-                    "result": "Las vitaminas frescas recuperan la fuerza física de toda la tripulación."
+                    "result": "Las vitaminas le devuelven la fuerza a toda la tripulación."
                 },
                 "playerChoiceC": {
-                    "action": "Maximizar fotosíntesis para purificar cabina",
-                    "sacrifice": "Ninguno",
-                    "benefit": "+3.5 kg de Oxígeno",
+                    "action": "Dejar que las plantas limpien el aire",
+                    "sacrifice": "Sin costo",
+                    "benefit": "Ganas 3.5 kg de oxígeno",
                     "effects": {
                         "electricidad": 0,
                         "agua": 0,
@@ -438,7 +538,7 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": 0,
                         "oxigeno": 3.5
                     },
-                    "result": "Las plantas absorben dióxido de carbono y liberan oxígeno puro."
+                    "result": "Las plantas respiran el aire usado y sueltan oxígeno limpio."
                 }
             },
             "educationalTakeaway": "Cultivar plantas en el espacio no solo da comida fresca: también ayuda a producir oxígeno y mejorar la salud."
@@ -449,15 +549,25 @@ export const NASA_GAME_SCENARIOS = {
             "eventType": "NEGATIVE_TRADEOFF",
             "category": "ISRU & Nuclear Power Load",
             "realWorldSource": "NASA Artemis Shackleton Crater & Kilopower Thermal Telemetry",
-            "situationTitle": "¡Sobrecarga durante la Noche Polar Lunar!",
-            "kidFriendlyContext": "En medio de los 14 días de oscuridad total en la Luna, el frío extremo exige más calefacción justo cuando el robot minero derrite hielo subterráneo.",
+            "situationTitle": "¡La noche de la Luna es larguísima y helada!",
+            "kidFriendlyContext": "En la Luna la noche dura 14 días. Hace muchísimo frío y necesitas calefacción, pero el robot que saca agua de hielo también gasta mucha energía.",
             "triggerConditions": {
-                "dayRange": [15, 30],
-                "requiredEquipment": ["KILOPOWER_REACTOR", "ISRU_WATER_MINER"],
+                "dayRange": [
+                    15,
+                    30
+                ],
+                "requiredEquipment": [
+                    "KILOPOWER_REACTOR",
+                    "ISRU_WATER_MINER"
+                ],
                 "resourceThresholds": {
                     "logic": "AND",
                     "conditions": [
-                        { "metric": "agua", "operator": "<", "value": 40 }
+                        {
+                            "metric": "agua",
+                            "operator": "<",
+                            "value": 40
+                        }
                     ]
                 }
             },
@@ -468,18 +578,22 @@ export const NASA_GAME_SCENARIOS = {
                     {
                         "astronautId": "ASTRO-01",
                         "role": "Ingeniero Eléctrico",
-                        "triggerChanceDelta": -0.30,
+                        "triggerChanceDelta": -0.3,
                         "finalTriggerChance": 0.15,
                         "finalAvoidChance": 0.85
                     }
                 ]
             },
             "gameplayMechanics": {
-                "resourcesAffected": ["electricidad", "agua", "salud"],
+                "resourcesAffected": [
+                    "electricidad",
+                    "agua",
+                    "salud"
+                ],
                 "playerChoiceA": {
-                    "action": "Forzar el reactor Kilopower para seguir extrayendo hielo",
-                    "sacrifice": "-22% de Electricidad",
-                    "benefit": "+25 L de Agua",
+                    "action": "Usar toda la energía para sacar hielo",
+                    "sacrifice": "Pierdes 22% de energía",
+                    "benefit": "Ganas 25 L de agua",
                     "effects": {
                         "electricidad": -22,
                         "agua": 25,
@@ -487,12 +601,12 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": 0,
                         "oxigeno": 0
                     },
-                    "result": "Consigues derretir hielo suficiente para los tanques, pero la reserva eléctrica queda baja."
+                    "result": "Consigues agua, pero casi se acaba la energía."
                 },
                 "playerChoiceB": {
-                    "action": "Pausar la excavadora de hielo y priorizar calefacción",
-                    "sacrifice": "-15 L de Agua y -6% de Salud",
-                    "benefit": "Mantiene estable el 100% de la Electricidad",
+                    "action": "Parar el robot y usar la calefacción",
+                    "sacrifice": "Pierdes 15 L de agua y 6% de salud",
+                    "benefit": "No pierdes energía",
                     "effects": {
                         "electricidad": 0,
                         "agua": -15,
@@ -500,7 +614,7 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": -6,
                         "oxigeno": 0
                     },
-                    "result": "La red eléctrica no sufre daños, pero gastas agua de emergencia mientras el hielo vuelve a congelarse."
+                    "result": "Cuidas la energía, pero gastas agua de emergencia."
                 }
             },
             "educationalTakeaway": "La noche lunar dura casi 15 días terrestres y alcanza -180 °C, por lo que la energía nuclear es vital para extraer agua."
@@ -511,19 +625,25 @@ export const NASA_GAME_SCENARIOS = {
             "eventType": "NEGATIVE_TRADEOFF",
             "category": "Planetary Surface & EVA",
             "realWorldSource": "NASA Lunar Regolith Abrasion & xEMU Suit Diagnostics",
-            "situationTitle": "¡Polvo Lunar Afilado en las Juntas de los Trajes!",
-            "kidFriendlyContext": "Al regresar de explorar en el vehículo abierto, el polvo de la Luna —que es afilado como vidrio molido— se mete en los sellos de los trajes espaciales.",
+            "situationTitle": "¡Polvo filoso en los trajes espaciales!",
+            "kidFriendlyContext": "El polvo de la Luna es tan filoso como vidrio molido. Se metió en las juntas de los trajes y hay que limpiarlo.",
             "triggerConditions": {
-                "dayRange": [5, 42],
-                "requiredEquipment": ["XEMU_SUITS", "LTV_ROVER"],
+                "dayRange": [
+                    5,
+                    42
+                ],
+                "requiredEquipment": [
+                    "XEMU_SUITS",
+                    "LTV_ROVER"
+                ],
                 "resourceThresholds": {
                     "logic": "AND",
                     "conditions": []
                 }
             },
             "probabilities": {
-                "baseTriggerChance": 0.50,
-                "baseAvoidChance": 0.50,
+                "baseTriggerChance": 0.5,
+                "baseAvoidChance": 0.5,
                 "crewModifiers": [
                     {
                         "astronautId": "ASTRO-06",
@@ -535,24 +655,28 @@ export const NASA_GAME_SCENARIOS = {
                 ]
             },
             "gameplayMechanics": {
-                "resourcesAffected": ["oxigeno", "salud", "agua"],
+                "resourcesAffected": [
+                    "oxigeno",
+                    "salud",
+                    "agua"
+                ],
                 "playerChoiceA": {
-                    "action": "Presurizar la esclusa para expulsar polvo y reparar sellos",
-                    "sacrifice": "-4.0 kg de Oxígeno y -8% de Salud",
-                    "benefit": "Ahorra el 100% del Agua",
+                    "action": "Limpiar los trajes con aire a presión",
+                    "sacrifice": "Pierdes 4 kg de oxígeno y 8% de salud",
+                    "benefit": "No gastas nada de agua",
                     "effects": {
                         "electricidad": 0,
                         "agua": 0,
                         "comida": 0,
                         "salud": -8,
-                        "oxigeno": -4.0
+                        "oxigeno": -4
                     },
-                    "result": "Limpian los trajes con aire a presión y trabajo duro sin gastar ni una gota de agua."
+                    "result": "Los trajes quedan limpios sin usar agua, pero el trabajo cansa."
                 },
                 "playerChoiceB": {
-                    "action": "Lavar los trajes con agua a presión en la cámara",
-                    "sacrifice": "-18 L de Agua",
-                    "benefit": "Conserva 100% de Oxígeno y Salud",
+                    "action": "Lavar los trajes con agua",
+                    "sacrifice": "Pierdes 18 L de agua",
+                    "benefit": "No pierdes oxígeno ni salud",
                     "effects": {
                         "electricidad": 0,
                         "agua": -18,
@@ -560,7 +684,7 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": 0,
                         "oxigeno": 0
                     },
-                    "result": "El agua arrastra el polvo magnético sin esfuerzo físico ni pérdida de oxígeno."
+                    "result": "El agua se lleva el polvo fácil, pero gastas mucha agua."
                 }
             },
             "educationalTakeaway": "El polvo lunar no tiene viento ni agua que lo redondee, por eso sus granos son microscópicos y muy abrasivos."
@@ -571,15 +695,25 @@ export const NASA_GAME_SCENARIOS = {
             "eventType": "NEGATIVE_TRADEOFF",
             "category": "Station Structural & Thermal Control",
             "realWorldSource": "NASA Lunar Gateway Thermal Control Loop Telemetry",
-            "situationTitle": "¡Fuga en el Circuito Térmico de Gateway!",
-            "kidFriendlyContext": "Con 6 astronautas a bordo, una tubería externa de la estación pierde líquido refrigerante y el frío del espacio empieza a congelar los pasillos.",
+            "situationTitle": "¡Se está congelando la estación!",
+            "kidFriendlyContext": "Un tubo de afuera perdió el líquido que mantiene el calor. Los pasillos se están enfriando y los 6 astronautas tienen frío.",
             "triggerConditions": {
-                "dayRange": [4, 19],
-                "requiredEquipment": ["KILOPOWER_REACTOR", "IROSA_SOLAR"],
+                "dayRange": [
+                    4,
+                    19
+                ],
+                "requiredEquipment": [
+                    "KILOPOWER_REACTOR",
+                    "IROSA_SOLAR"
+                ],
                 "resourceThresholds": {
                     "logic": "AND",
                     "conditions": [
-                        { "metric": "electricidad", "operator": "<", "value": 45 }
+                        {
+                            "metric": "electricidad",
+                            "operator": "<",
+                            "value": 45
+                        }
                     ]
                 }
             },
@@ -591,17 +725,21 @@ export const NASA_GAME_SCENARIOS = {
                         "astronautId": "ASTRO-09",
                         "role": "Ingeniero Mecánico",
                         "triggerChanceDelta": -0.35,
-                        "finalTriggerChance": 0.20,
-                        "finalAvoidChance": 0.80
+                        "finalTriggerChance": 0.2,
+                        "finalAvoidChance": 0.8
                     }
                 ]
             },
             "gameplayMechanics": {
-                "resourcesAffected": ["electricidad", "salud", "oxigeno"],
+                "resourcesAffected": [
+                    "electricidad",
+                    "salud",
+                    "oxigeno"
+                ],
                 "playerChoiceA": {
-                    "action": "Encender calentadores eléctricos auxiliares al máximo",
-                    "sacrifice": "-25% de Electricidad y -3% de Salud",
-                    "benefit": "Conserva el 100% del Oxígeno",
+                    "action": "Prender todos los calentadores",
+                    "sacrifice": "Pierdes 25% de energía y 3% de salud",
+                    "benefit": "No pierdes oxígeno",
                     "effects": {
                         "electricidad": -25,
                         "agua": 0,
@@ -609,12 +747,12 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": -3,
                         "oxigeno": 0
                     },
-                    "result": "Estabilizas la temperatura rápido usando casi toda la reserva de batería."
+                    "result": "La estación se calienta rápido, pero casi se acaba la batería."
                 },
                 "playerChoiceB": {
-                    "action": "Cerrar escotillas y sellar la fuga desde el exterior",
-                    "sacrifice": "-16% de Salud y -3.5 kg de Oxígeno",
-                    "benefit": "Conserva el 100% de la Electricidad",
+                    "action": "Cerrar las puertas y arreglar el tubo desde afuera",
+                    "sacrifice": "Pierdes 16% de salud y 3.5 kg de oxígeno",
+                    "benefit": "No pierdes energía",
                     "effects": {
                         "electricidad": 0,
                         "agua": 0,
@@ -622,7 +760,7 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": -16,
                         "oxigeno": -3.5
                     },
-                    "result": "Reparas el tubo sin gastar batería, pero el frío y la salida exterior desgastan a los 6 tripulantes."
+                    "result": "Arreglas el tubo, pero el frío y la salida cansan al equipo."
                 }
             },
             "educationalTakeaway": "En el vacío espacial no hay aire que conduzca el calor; las estaciones dependen de circuitos cerrados de refrigeración."
@@ -633,15 +771,24 @@ export const NASA_GAME_SCENARIOS = {
             "eventType": "NEGATIVE_TRADEOFF",
             "category": "Water Processor & Closed-Loop ECLSS",
             "realWorldSource": "NASA OSDR Bio Repo (OSD-729: Biofilm formation in ISS Water Processor)",
-            "situationTitle": "¡Obstrucción por Biopelícula en Recicladora WRS!",
-            "kidFriendlyContext": "En microgravedad y baja gravedad marciana, bacterias inofensivas forman una capa pegajosa dentro de los tubos de la máquina recicladora de agua y bloquean el filtro.",
+            "situationTitle": "¡La máquina de agua se tapó!",
+            "kidFriendlyContext": "Unas bacterias inofensivas formaron una capa pegajosa dentro de la máquina que limpia el agua. Ahora el filtro está tapado.",
             "triggerConditions": {
-                "dayRange": [25, 165],
-                "requiredEquipment": ["WRS_RECYCLER"],
+                "dayRange": [
+                    25,
+                    165
+                ],
+                "requiredEquipment": [
+                    "WRS_RECYCLER"
+                ],
                 "resourceThresholds": {
                     "logic": "AND",
                     "conditions": [
-                        { "metric": "agua", "operator": "<", "value": 35 }
+                        {
+                            "metric": "agua",
+                            "operator": "<",
+                            "value": 35
+                        }
                     ]
                 }
             },
@@ -652,31 +799,36 @@ export const NASA_GAME_SCENARIOS = {
                     {
                         "astronautId": "ASTRO-02",
                         "role": "Ingeniero Hidráulico",
-                        "triggerChanceDelta": -0.30,
+                        "triggerChanceDelta": -0.3,
                         "finalTriggerChance": 0.15,
                         "finalAvoidChance": 0.85
                     }
                 ]
             },
             "gameplayMechanics": {
-                "resourcesAffected": ["electricidad", "oxigeno", "agua", "salud"],
+                "resourcesAffected": [
+                    "electricidad",
+                    "oxigeno",
+                    "agua",
+                    "salud"
+                ],
                 "playerChoiceA": {
-                    "action": "Esterilizar tuberías con choque térmico y ozono",
-                    "sacrifice": "-20% de Electricidad y -2.0 kg de Oxígeno",
-                    "benefit": "Recupera el reciclaje al 98% sin perder Agua",
+                    "action": "Limpiar los tubos con calor y ozono",
+                    "sacrifice": "Pierdes 20% de energía y 2 kg de oxígeno",
+                    "benefit": "No pierdes agua",
                     "effects": {
                         "electricidad": -20,
                         "agua": 0,
                         "comida": 0,
                         "salud": 0,
-                        "oxigeno": -2.0
+                        "oxigeno": -2
                     },
-                    "result": "Limpias los conductos internos y mantienes intacta tu reserva de agua potable."
+                    "result": "La máquina vuelve a funcionar y cuidas tu agua."
                 },
                 "playerChoiceB": {
-                    "action": "Desarmar el filtro manualmente y usar reserva líquida",
-                    "sacrifice": "-28 L de Agua y -7% de Salud",
-                    "benefit": "Conserva 100% de Electricidad y Oxígeno",
+                    "action": "Desarmar y limpiar el filtro a mano",
+                    "sacrifice": "Pierdes 28 L de agua y 7% de salud",
+                    "benefit": "No gastas energía ni oxígeno",
                     "effects": {
                         "electricidad": 0,
                         "agua": -28,
@@ -684,7 +836,7 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": -7,
                         "oxigeno": 0
                     },
-                    "result": "Pierdes agua sin reciclar durante dos días mientras limpian los conductos a mano."
+                    "result": "Pierdes agua por dos días mientras limpian a mano."
                 }
             },
             "educationalTakeaway": "El estudio OSD-729 de la NASA analiza cómo evitar que las biopelículas bloqueen los recicladores de agua en viajes largos."
@@ -695,19 +847,25 @@ export const NASA_GAME_SCENARIOS = {
             "eventType": "NEGATIVE_TRADEOFF",
             "category": "Martian Weather & Closed-Loop Agriculture",
             "realWorldSource": "NASA InSight Mars Weather & OSDR OSD-971 Plant Stress",
-            "situationTitle": "¡Tormenta Global de Polvo en el Cráter Jezero!",
-            "kidFriendlyContext": "Una tormenta gigante cubre el cielo de Marte durante semanas. Los paneles solares de respaldo dejan de funcionar y el sistema cerrado debe elegir entre alimentar la granja o ahorrar energía.",
+            "situationTitle": "¡Una tormenta gigante de polvo cubre Marte!",
+            "kidFriendlyContext": "El polvo tapa el cielo durante semanas y los paneles solares ya no funcionan. Tienes que decidir si usas energía para las plantas o la guardas.",
             "triggerConditions": {
-                "dayRange": [90, 115],
-                "requiredEquipment": ["APH_GREENHOUSE", "SABATIER_SYSTEM"],
+                "dayRange": [
+                    90,
+                    115
+                ],
+                "requiredEquipment": [
+                    "APH_GREENHOUSE",
+                    "SABATIER_SYSTEM"
+                ],
                 "resourceThresholds": {
                     "logic": "AND",
                     "conditions": []
                 }
             },
             "probabilities": {
-                "baseTriggerChance": 0.60,
-                "baseAvoidChance": 0.40,
+                "baseTriggerChance": 0.6,
+                "baseAvoidChance": 0.4,
                 "crewModifiers": [
                     {
                         "astronautId": "ASTRO-03",
@@ -719,11 +877,16 @@ export const NASA_GAME_SCENARIOS = {
                 ]
             },
             "gameplayMechanics": {
-                "resourcesAffected": ["electricidad", "agua", "comida", "salud"],
+                "resourcesAffected": [
+                    "electricidad",
+                    "agua",
+                    "comida",
+                    "salud"
+                ],
                 "playerChoiceA": {
-                    "action": "Redirigir energía del reactor nuclear a la Granja APH",
-                    "sacrifice": "-18% de Electricidad y -15 L de Agua",
-                    "benefit": "+4.5 kg de Comida",
+                    "action": "Darle energía a la granja",
+                    "sacrifice": "Pierdes 18% de energía y 15 L de agua",
+                    "benefit": "Ganas 4.5 kg de comida",
                     "effects": {
                         "electricidad": -18,
                         "agua": -15,
@@ -731,12 +894,12 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": 0,
                         "oxigeno": 0
                     },
-                    "result": "Las lámparas de la granja siguen brillando en plena oscuridad marciana y aseguran comida fresca."
+                    "result": "Las luces de la granja siguen prendidas y hay comida fresca."
                 },
                 "playerChoiceB": {
-                    "action": "Poner la granja en hibernación y racionar comida",
-                    "sacrifice": "-6.5 kg de Comida y -10% de Salud",
-                    "benefit": "Conserva 100% de Electricidad y Agua",
+                    "action": "Apagar la granja y comer menos",
+                    "sacrifice": "Pierdes 6.5 kg de comida y 10% de salud",
+                    "benefit": "No pierdes energía ni agua",
                     "effects": {
                         "electricidad": 0,
                         "agua": 0,
@@ -744,7 +907,7 @@ export const NASA_GAME_SCENARIOS = {
                         "salud": -10,
                         "oxigeno": 0
                     },
-                    "result": "Ahorras energía y agua durante la tormenta, pero pierdes cosecha y los astronautas pasan hambre."
+                    "result": "Ahorras energía y agua, pero hay menos comida y los astronautas tienen hambre."
                 }
             },
             "educationalTakeaway": "Las tormentas de polvo en Marte pueden durar meses y bloquear hasta el 99% de la luz solar."
