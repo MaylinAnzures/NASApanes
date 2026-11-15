@@ -1,0 +1,17 @@
+.btn {
+  height: var(--btn-h);
+  padding: 0 28px;
+  border: 0;
+  border-radius: var(--radius);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--text-dark);
+  background: var(--mint);
+  box-shadow: 0 var(--depth) 0 var(--mint-depth);
+  transition: transform 0.06s, box-shadow 0.06s;
+}
+.btn--danger { background: var(--danger); box-shadow: 0 var(--depth) 0 var(--danger-depth); }
+.btn:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 2px 0 var(--mint-depth); }
+.btn:focus-visible { outline: 3px solid var(--mint-light); outline-offset: 4px; }
+.btn:disabled { opacity: .45; cursor: not-allowed; box-shadow: none; }

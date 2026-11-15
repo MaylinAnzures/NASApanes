@@ -1,41 +1,24 @@
-import { useEffect, useState } from 'react';
-import { usePhaserGame } from '../hooks/usePhaserGame';
-import { GAME_EVENTS } from '../bridge/gameEvents';
+import { useEffect, useRef } from 'react';
+import Phaser from 'phaser';
+import { createGameConfig } from '../game/gameConfig';
+import { eventBus } from '../bridge/eventBus';
 
-export function GameCanvas() {
-  const { containerRef, eventBus } = usePhaserGame();
-  const [score, setScore] = useState(0);
-  const [health, setHealth] = useState(100);
+export default function GameCanvas() {
+  const containerRef = useRef(null);
+  const gameRef = useRef(null);
 
   useEffect(() => {
-    const handleScoreChanged = (value) => setScore(value);
-    const handleHealthChanged = (value) => setHealth(value);
+    if (gameRef.current) return;
 
-    eventBus.on(GAME_EVENTS.SCORE_CHANGED, handleScoreChanged);
-    eventBus.on(GAME_EVENTS.PLAYER_HEALTH_CHANGED, handleHealthChanged);
+    gameRef.current = new Phaser.Game(
+      createGameConfig({ parent: containerRef.current, eventBus })
+    );
 
     return () => {
-      eventBus.off(GAME_EVENTS.SCORE_CHANGED, handleScoreChanged);
-      eventBus.off(GAME_EVENTS.PLAYER_HEALTH_CHANGED, handleHealthChanged);
+      gameRef.current?.destroy(true);
+      gameRef.current = null;
     };
-  }, [eventBus]);
+  }, []);
 
-  const movePlayer = (direction) => {
-    eventBus.emit(GAME_EVENTS.PLAYER_MOVE, direction);
-  };
-
-  return (
-    <section className="game-shell">
-      <div ref={containerRef} className="phaser-container" />
-      <aside className="hud">
-        <div className="stat"><span>Puntuación</span><strong>{score}</strong></div>
-        <div className="stat"><span>Salud</span><strong>{health}%</strong></div>
-        <div className="controls">
-          <button type="button" onClick={() => movePlayer('left')}>Izquierda</button>
-          <button type="button" onClick={() => movePlayer('right')}>Derecha</button>
-          <button type="button" onClick={() => eventBus.emit(GAME_EVENTS.PLAYER_ATTACK)}>Atacar</button>
-        </div>
-      </aside>
-    </section>
-  );
+  return <div ref={containerRef} style={{ width: '100%', height: '100vh' }} />;
 }
